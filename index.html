@@ -4,7 +4,7 @@
 <style>
 :root{color-scheme:light dark;--bg:#fff;--fg:#222;--bar:#0288d1;--gut:#eee;--line:#d8d8d8;--acc:#0288d1;--card:#f6f6f6;--num:#a00;--word:#2e7d32;--op:#e69500;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1b1b1b;--fg:#eee;--gut:#2a2a2a;--line:#3a3a3a;--card:#262626;--num:#ff8a80;--word:#81c784}}
-*{box-sizing:border-box}html,body{height:100%;margin:0}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{min-height:480px;overflow:hidden}#wrap,#prod{min-height:200px}@media(max-width:480px){#res{width:38%}#gut{width:36px;font-size:18px}#ed,#res{font-size:18px}header{padding:10px 12px}.row{padding:10px;gap:8px}.row input{width:76px}}
 body{background:var(--bg);color:var(--fg);font-family:Roboto,Arial,sans-serif;display:flex;flex-direction:column}
 header{background:var(--bar);color:#fff;display:flex;align-items:center;gap:14px;padding:14px 16px;font-size:20px;font-weight:500}
 header b{flex:1;font-weight:500}header button{background:none;border:0;color:#fff;font-size:24px;padding:0 6px}
@@ -18,7 +18,7 @@ header b{flex:1;font-weight:500}header button{background:none;border:0;color:#ff
 #sug button,.chip{border:1px solid var(--acc);color:var(--acc);background:var(--bg);border-radius:18px;padding:8px 14px;font-size:16px;white-space:nowrap}
 #tot{background:var(--gut);padding:12px 16px;display:flex;justify-content:space-between;font-size:20px}
 #tot span:first-child{color:var(--acc);font-weight:600}
-#prod{padding:12px;overflow-y:auto}
+#prod{padding:0 12px 16px;overflow-y:auto}#prod>*{flex:none;width:100%;max-width:640px;margin-left:auto;margin-right:auto}#q{position:sticky;top:12px;margin-top:12px;box-shadow:0 0 0 10px var(--bg);z-index:2}@media(max-width:360px){.add{grid-template-columns:1fr 1fr}}
 input{font-size:17px;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);width:100%;min-width:0}
 .row{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:10px;padding:12px;margin-top:8px}
 .row .n{flex:1}.row small{color:#888;display:block}.row input{width:90px;text-align:right}
@@ -38,7 +38,7 @@ nav .on2{color:var(--acc);border-top-color:var(--acc)}
 <section id="prod">
  <input id="q" type="search" placeholder="Search product (k, vg…)">
  <div id="list"></div>
- <div class="add"><input id="an" placeholder="Name"><input id="as" placeholder="Short"><input id="ap" type="number" placeholder="Price"><button id="ab">Add</button></div><div style="margin-top:18px;font-weight:600">Bulk add</div><textarea id="bulk" rows="5" placeholder="chota advans 90 ca&#10;vimal 130 vl" style="width:100%;margin-top:6px;font:17px/1.5 Roboto,Arial,sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)"></textarea><div class="add" style="grid-template-columns:1fr auto"><small id="bmsg" style="color:#888;align-self:center">One per line: name price short</small><button id="bb">Add all</button></div>
+ <div class="add"><input id="an" placeholder="Name"><input id="as" placeholder="Short"><input id="ap" type="number" placeholder="Price"><button id="ab">Add</button></div><div style="margin-top:18px;font-weight:600">Bulk add</div><textarea id="bulk" rows="5" placeholder="chota advans 90 ca&#10;vimal 130 vl" style="display:block;width:100%;min-height:130px;resize:vertical;margin-top:6px;font:17px/1.5 Roboto,Arial,sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)"></textarea><div class="add" style="grid-template-columns:1fr auto"><small id="bmsg" style="color:#888;align-self:center">One per line: name price short</small><button id="bb">Add all</button></div>
 </section>
 <nav><button id="t1" class="on2">Calculator</button><button id="t2">Products</button></nav>
 <script>
@@ -96,5 +96,6 @@ function draw(){
 $('q').oninput=draw;
 $('bb').onclick=function(){var n=0;$('bulk').value.split('\n').forEach(function(l){var m=l.trim().match(/^(.+?)\s+(\d+(?:\.\d+)?)\s*([a-zA-Z]*)$/);if(!m)return;var nm=m[1].trim(),ex=P.filter(function(x){return x.n.toLowerCase()===nm.toLowerCase()})[0];if(ex){ex.p=+m[2];if(m[3])ex.s=m[3]}else P.push({n:nm,s:m[3],p:+m[2]});n++});$('bulk').value='';$('bmsg').textContent=n+' added/updated';persist();draw()};
 $('ab').onclick=function(){var n=$('an').value.trim(),p=+$('ap').value;if(!n||!p)return;P.push({n:n,s:$('as').value.trim(),p:p});$('an').value=$('as').value=$('ap').value='';persist();draw()};
+function fit(){var h=window.innerHeight||document.documentElement.clientHeight;if(h>300)document.body.style.height=h+'px'}fit();window.addEventListener('resize',fit);
 if(!ed.value)ed.value='kings 219*6';run();
 </script></body></html>
