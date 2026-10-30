@@ -39,6 +39,12 @@ html,body{height:auto!important}body{display:flex!important;flex-direction:colum
 #calc{position:relative}#sug{position:absolute;order:0;left:10px;right:10px;max-height:none;overflow:hidden;border:1.5px solid var(--acc);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.4);background:var(--bg);z-index:15}#sug th{display:none}#sug td{padding:12px;border-bottom:1px solid var(--line);font-size:19px;color:var(--fg)}#sug tr:last-child td{border-bottom:0}#sug td:first-child{color:#888;width:34px;padding-right:0}#sug td:nth-child(2){width:64px}#sug td:nth-child(2){font-weight:700;color:var(--acc)}#sug td:last-child{color:var(--fg)}#sug tr:active td{background:var(--card)}
 #billv .bs td{border-bottom:1.5px solid #000}#billv .bs .rx{background:none;border:1.5px solid #c62828;color:#c62828;border-radius:6px;font-size:18px;font-weight:700;padding:2px 9px}
 
+/* ===== BILL OPEN: bill becomes the whole page, full length, no inner scroll (so every item is captured when printing) ===== */
+body.bo{display:block!important;height:auto!important;min-height:0!important;overflow:visible!important}
+body.bo header,body.bo nav,body.bo #calc,body.bo #prod,body.bo #bills,body.bo #sales,body.bo #set,body.bo #drawer,body.bo #scrim{display:none!important}
+body.bo #billv{position:static!important;display:block!important;height:auto!important;min-height:0!important;overflow:visible!important}
+body.bo #billv .bs{display:block!important;height:auto!important;overflow:visible!important;flex:none!important;padding-bottom:40px}
+
 /* ===== PRINT FIX: plain block layout (no flex) so ALL rows print; page height is set dynamically by JS (#pg) ===== */
 @media print{
  :root{padding:0!important}
@@ -148,7 +154,7 @@ function showBill(){autoSave();var rows=[],tot=0,n=0;
   else{item=l.replace(/[^a-zA-Z ]/g,'').trim()||'Item'}
   tot+=v;rows.push('<tr><td>'+n+'</td><td>'+html(item)+'</td><td>'+qty+'</td><td>'+(rate===''?'':fmt(rate))+'</td><td>'+fmt(v)+'</td><td class="np"><button class="rx" data-l="'+li+'">✕</button></td></tr>')});
  $('bbody').innerHTML=rows.join('')||'<tr><td colspan="6" style="text-align:center;color:#888">No items</td></tr>';
- $('btot').textContent=fmt(tot);$('bno').textContent='Bill #'+billNo();Array.prototype.forEach.call($('bbody').querySelectorAll('.rx'),function(b){b.onclick=function(){var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run();showBill()}});$('billv').style.display='flex';setPage()}
+ $('btot').textContent=fmt(tot);$('bno').textContent='Bill #'+billNo();Array.prototype.forEach.call($('bbody').querySelectorAll('.rx'),function(b){b.onclick=function(){var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run();showBill()}});$('billv').style.display='flex';document.body.classList.add('bo');window.scrollTo(0,0);setPage()}
 ed.addEventListener('input',function(e){var v=ed.value,c=ed.selectionStart;if(e.data===' '&&c===v.length){var ln=v.slice(v.lastIndexOf('\n',c-2)+1,c-1);if(/[*x]\s*\d+(\.\d+)?$/i.test(ln)&&ev(ln)!==null){ed.value=v.slice(0,c-1)+'\n';ed.setSelectionRange(c,c);run()}}});
 var SAMPLE=[['Parle G',10,'pg'],['Maggi Noodles',14,'mg'],['Lays Chips',20,'ly'],['Kurkure',20,'kr'],['Good Day Biscuit',10,'gd'],['Dairy Milk',20,'dm'],['Sprite',40,'sp'],['Coca Cola',40,'cc'],['Water Bottle',20,'wb'],['Dove Soap',55,'ds'],['Lux Soap',35,'lx'],['Colgate',60,'cg'],['Clinic Plus',2,'cp'],['Surf Excel',10,'se'],['Tata Salt',28,'ts'],['Sugar',45,'sg'],['Eggs',7,'eg'],['Milk Packet',30,'ml'],['Bread',40,'br'],['Queen Cake',10,'qc']];
 function addSample(){var n=0;SAMPLE.forEach(function(x){if(!P.some(function(y){return y.n.toLowerCase()===x[0].toLowerCase()})){P.push({n:x[0],s:x[2],p:x[1]});n++}});persist();return n}
@@ -156,7 +162,7 @@ function randBill(c){var a=P.slice();for(var i=a.length-1;i>0;i--){var j=Math.fl
 Array.prototype.forEach.call(document.querySelectorAll('.rg'),function(b){b.onclick=function(){var c=+b.getAttribute('data-n');if(P.length<c)addSample();randBill(c)}});
 $('smp').onclick=function(){var n=addSample();alert(n+' products added');tab(2)};
 $('xs').onclick=function(e){var b=e.target;if(b.tagName!=='BUTTON')return;var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run()};
-$('bl').onclick=showBill;$('bclose').onclick=function(){$('billv').style.display='none';ed.value='';curId=null;run();tab(1)};
+$('bl').onclick=showBill;$('bclose').onclick=function(){document.body.classList.remove('bo');$('billv').style.display='none';ed.value='';curId=null;run();tab(1)};
 var B=[],curId=null;try{B=JSON.parse(localStorage.getItem('cn_b')||'[]')||[]}catch(e){}
 function saveB(){try{localStorage.setItem('cn_b',JSON.stringify(B))}catch(e){}}
 function dk(t){var d=new Date(t);return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
