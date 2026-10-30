@@ -32,12 +32,13 @@ nav .on2{color:var(--acc);border-top-color:var(--acc)}
 #bills,#sales,#set{padding:0 12px 16px;overflow-y:auto}#set{padding-top:8px}#set label{display:block;margin-top:16px;color:#888;font-size:14px}#set input{margin-top:6px}#sv{margin-top:20px;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:12px 24px;font-size:18px;align-self:flex-start}#bshop{text-align:center;font-size:22px;font-weight:700;padding:4px 0 10px}#blist{padding-top:4px}.emp{color:#888;text-align:center;margin-top:24px}#scards{display:flex;gap:10px;margin-top:12px}.sc{flex:1;background:var(--card);border-radius:10px;padding:12px}.sc b{display:block;font-size:26px;margin:4px 0}.sc small{color:#888}#sd{margin-top:12px}#sdays table{width:100%;border-collapse:collapse;margin-top:14px;font-size:17px}#sdays th{text-align:left;color:#888;font-size:14px;padding:6px 4px;border-bottom:1px solid var(--line)}#sdays td{padding:11px 4px;border-bottom:1px solid var(--line)}#sdays th:nth-child(n+2),#sdays td:nth-child(n+2){text-align:right}
 #scrim{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:19}#drawer{position:fixed;top:0;bottom:0;left:0;width:260px;max-width:80%;background:var(--bg);z-index:20;transform:translateX(-105%);transition:transform .2s;padding-top:env(safe-area-inset-top,0px)}#drawer.open{transform:none}.dh{background:var(--bar);color:#fff;padding:20px 16px}.dh b{font-size:22px;font-weight:500}.dh small{display:block;margin-top:14px;opacity:.85}#dts{font-size:26px;font-weight:600}#drawer button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);font-size:18px;padding:16px}#drawer button.cur{color:var(--acc);background:var(--card)}
 #billv{background:#fff;color:#000}#billv .bh{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}#billv .bh b{font-size:24px;font-weight:600}#billv .bh button{font-size:30px;padding:0 8px}#billv .bs{color:#000}#billv .bs table{font-size:23px;font-weight:700}#billv .bs th{color:#000;font-size:17px;font-weight:800;border-bottom:2px solid #000}#billv .bs td{padding:15px 4px;border-bottom:1px solid #888}#billv .bt{font-size:32px;font-weight:800;border-top:3px solid #000}#bshop{color:#000}
-#gut,#ed,#res,#xs{background-image:linear-gradient(to bottom,transparent 31px,rgba(128,128,128,.5) 31px);background-size:100% 32px;background-position:0 8px}#xs{width:40px;flex:none;padding:8px 0;overflow:hidden}#xs button,#xs span{display:block;height:32px;width:100%;line-height:32px;padding:0;border:0;background:none;color:#c62828;font-size:19px;text-align:center}#billv .np{display:none}
+html,body{height:auto!important}body{display:flex!important;flex-direction:column;overflow:visible!important;min-height:100vh!important}header{position:sticky;top:0;z-index:12;order:-2}nav{position:sticky;order:-1;z-index:11}#calc{flex:none}#tot{position:sticky;order:1;z-index:10}#sug{position:sticky;order:2;z-index:9}#wrap{order:3;overflow:visible}#prod,#bills,#sales,#set{flex:none;overflow:visible}#q{position:static;box-shadow:none}
+#gut,#ed,#res,#xs{background-image:linear-gradient(to bottom,transparent 31px,rgba(128,128,128,.5) 31px);background-size:100% 32px;background-position:0 8px}#xs{width:40px;flex:none;padding:8px 0;overflow:hidden}#xs button,#xs span{display:block;height:32px;width:100%;line-height:32px;padding:0;border:0;background:none;color:#c62828;font-size:19px;text-align:center}#billv .np{display:none}#billv{z-index:30}
 #billv .bs td{border-bottom:1.5px solid #000}#billv .bs .rx{background:none;border:1.5px solid #c62828;color:#c62828;border-radius:6px;font-size:18px;font-weight:700;padding:2px 9px}
 @page{size:58mm auto;margin:0}
 @media print{body{height:auto!important;overflow:visible;background:#fff}header,nav,#calc,#prod,#bills,#sales,#set,#drawer,#scrim,.bh button,.np{display:none!important}#billv{position:static;display:flex!important;color:#000;background:#fff}.bh{background:none;color:#000;display:block;padding:2mm}.bh b{font-size:16px}.bs{overflow:visible;padding:0 2mm}#billv .bs table{font-size:12px}#billv .bs th{font-size:11px}#billv .bs td{padding:5px 2px}#bshop{font-size:16px}#billv .bt{font-size:16px}}
 </style></head><body>
-<header><button id="mn">☰</button><b><span id="ttl">CalcNote</span><small id="shp" style="display:none;font-size:12px;font-weight:400;opacity:.9"></small></b><button id="bl" title="Bill preview">🧾</button><button id="new" title="New">+</button><button id="save" title="Save">💾</button></header>
+<header><button id="mn">☰</button><b><span id="ttl">CalcNote</span><small id="shp" style="display:none;font-size:12px;font-weight:400;opacity:.9"></small></b><button id="bl" title="Bill preview">🧾</button><button id="new" title="New">+</button><button id="save" title="Save" style="display:none">💾</button></header>
 <section id="calc" class="on">
  <div id="wrap"><div id="gut">1</div><textarea id="ed" wrap="off" spellcheck="false" autocapitalize="off" placeholder="k*6"></textarea><div id="res"></div><div id="xs"></div></div>
  <div id="sug"></div>
@@ -83,7 +84,7 @@ function word(){var c=ed.selectionStart,t=ed.value.slice(0,c),m=t.match(/([a-zA-
 function suggest(){
  var w=word(),box=$('sug');box.innerHTML='';
  if(!w){box.style.display='none';return}
- var q=w.w.toLowerCase(),r=P.filter(function(x){return x.n.toLowerCase().indexOf(q)===0||x.s.toLowerCase().indexOf(q)===0||x.n.toLowerCase().indexOf(q)>0});
+ var q=w.w.toLowerCase(),r=P.filter(function(x){return x.s&&x.s.toLowerCase().indexOf(q)===0});if(!r.length)r=P.filter(function(x){return x.n.toLowerCase().indexOf(q)===0});
  r=r.filter(function(x){return x.n.toLowerCase()!==q});
  if(!r.length){box.style.display='none';return}
  box.style.display='block';var tb=document.createElement('table');tb.innerHTML='<tr><th>S/No</th><th>Short</th><th>Product</th></tr>';box.appendChild(tb);
@@ -110,7 +111,8 @@ $('q').oninput=draw;
 $('bb').onclick=function(){var n=0;$('bulk').value.split('\n').forEach(function(l){var m=l.trim().match(/^(.+?)\s+(\d+(?:\.\d+)?)\s*([a-zA-Z]*)$/);if(!m)return;var nm=m[1].trim(),ex=P.filter(function(x){return x.n.toLowerCase()===nm.toLowerCase()})[0];if(ex){ex.p=+m[2];if(m[3])ex.s=m[3]}else P.push({n:nm,s:m[3],p:+m[2]});n++});$('bulk').value='';$('bmsg').textContent=n+' added/updated';persist();draw()};
 $('ab').onclick=function(){var n=$('an').value.trim(),p=+$('ap').value;if(!n||!p)return;P.push({n:n,s:$('as').value.trim(),p:p});$('an').value=$('as').value=$('ap').value='';persist();draw()};
 function findP(l){var best=null;P.slice().sort(function(a,b){return b.n.length-a.n.length}).some(function(x){return [x.n,x.s].some(function(k){if(!k)return false;var m=new RegExp('(^|[^a-zA-Z])('+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')(?![a-zA-Z])','i').exec(l);if(m){best={p:x,rest:l.slice(m.index+m[1].length+m[2].length)};return true}return false})});return best}
-function showBill(){var rows=[],tot=0,n=0;
+function autoSave(){var tot=sumTxt(ed.value);if(!tot)return;var x=curId?B.filter(function(z){return z.id===curId})[0]:null;if(x){x.txt=ed.value;x.total=tot}else{var no=peekNo(),id=Date.now();B.unshift({id:id,no:no,t:id,txt:ed.value,total:tot});curId=id;try{localStorage.setItem('cn_n',no)}catch(e){}}saveB()}
+function showBill(){autoSave();var rows=[],tot=0,n=0;
  ed.value.split('\n').forEach(function(l,li){var v=ev(l);if(v===null)return;n++;var f=findP(l),item,qty='',rate='';
   if(f){item=f.p.n;var r=f.rest.replace(/,/g,'').trim(),m;
    if(m=r.match(/^(\d+(?:\.\d+)?)\s*[*x]\s*(\d+(?:\.\d+)?)$/i)){rate=+m[1];qty=+m[2]}
@@ -120,8 +122,9 @@ function showBill(){var rows=[],tot=0,n=0;
   tot+=v;rows.push('<tr><td>'+n+'</td><td>'+html(item)+'</td><td>'+qty+'</td><td>'+(rate===''?'':fmt(rate))+'</td><td>'+fmt(v)+'</td><td class="np"><button class="rx" data-l="'+li+'">✕</button></td></tr>')});
  $('bbody').innerHTML=rows.join('')||'<tr><td colspan="6" style="text-align:center;color:#888">No items</td></tr>';
  $('btot').textContent=fmt(tot);$('bno').textContent='Bill #'+billNo();Array.prototype.forEach.call($('bbody').querySelectorAll('.rx'),function(b){b.onclick=function(){var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run();showBill()}});$('billv').style.display='flex'}
+ed.addEventListener('input',function(e){var v=ed.value,c=ed.selectionStart;if(e.data===' '&&c===v.length){var ln=v.slice(v.lastIndexOf('\n',c-2)+1,c-1);if(/[*x]\s*\d+(\.\d+)?$/i.test(ln)&&ev(ln)!==null){ed.value=v.slice(0,c-1)+'\n';ed.setSelectionRange(c,c);run()}}});
 $('xs').onclick=function(e){var b=e.target;if(b.tagName!=='BUTTON')return;var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run()};
-$('bl').onclick=showBill;$('bclose').onclick=function(){$('billv').style.display='none';tab(1)};
+$('bl').onclick=showBill;$('bclose').onclick=function(){$('billv').style.display='none';ed.value='';curId=null;run();tab(1)};
 var B=[],curId=null;try{B=JSON.parse(localStorage.getItem('cn_b')||'[]')||[]}catch(e){}
 function saveB(){try{localStorage.setItem('cn_b',JSON.stringify(B))}catch(e){}}
 function dk(t){var d=new Date(t);return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
@@ -158,6 +161,6 @@ $('save').onclick=function(){var tot=sumTxt(ed.value),b=this;if(!tot){b.textCont
  curId=null;saveB();ed.value='';run();b.textContent='✅';setTimeout(function(){b.textContent='💾'},900)};
 function peekNo(){var n=0;try{n=+localStorage.getItem('cn_n')||0}catch(e){}return n+1}
 function billNo(){var x=curId?B.filter(function(z){return z.id===curId})[0]:null;return x?(x.no||B.length-B.indexOf(x)):peekNo()}
-function fit(){var h=Math.min(window.innerHeight||9999,document.documentElement.clientHeight||9999);var g=(S&&S.g!==undefined&&S.g!=='')?+S.g:(/; wv\)|Version\/\d/.test(navigator.userAgent)?56:0);if(h>300&&h<9999)document.body.style.height=(h-g)+'px'}fit();window.addEventListener('resize',fit);
+function fit(){var H=document.querySelector('header'),N=$('t1').parentNode,T=$('tot'),a=H.offsetHeight,b=N.offsetHeight;N.style.top=a+'px';T.style.top=(a+b)+'px';$('sug').style.top=(a+b+T.offsetHeight)+'px'}fit();window.addEventListener('resize',fit);
 if(!ed.value)ed.value='kings 219*6';run();
 </script></body></html>
