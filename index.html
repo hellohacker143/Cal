@@ -34,6 +34,7 @@ nav .on2{color:var(--acc);border-top-color:var(--acc)}
 #billv{background:#fff;color:#000}#billv .bh{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}#billv .bh b{font-size:24px;font-weight:600}#billv .bh button{font-size:30px;padding:0 8px}#billv .bs{color:#000}#billv .bs table{font-size:23px;font-weight:700}#billv .bs th{color:#000;font-size:17px;font-weight:800;border-bottom:2px solid #000}#billv .bs td{padding:15px 4px;border-bottom:1px solid #888}#billv .bt{font-size:32px;font-weight:800;border-top:3px solid #000}#bshop{color:#000}
 html,body{height:auto!important}body{display:flex!important;flex-direction:column;overflow:visible!important;min-height:100vh!important}header{position:sticky;top:0;z-index:12;order:-2}nav{position:sticky;order:-1;z-index:11}#calc{flex:none}#tot{position:sticky;order:1;z-index:10}#sug{position:sticky;order:2;z-index:9}#wrap{order:3;overflow:visible}#prod,#bills,#sales,#set{flex:none;overflow:visible}#q{position:static;box-shadow:none}
 #gut,#ed,#res,#xs{background-image:linear-gradient(to bottom,transparent 31px,rgba(128,128,128,.5) 31px);background-size:100% 32px;background-position:0 8px}#xs{width:40px;flex:none;padding:8px 0;overflow:hidden}#xs button,#xs span{display:block;height:32px;width:100%;line-height:32px;padding:0;border:0;background:none;color:#c62828;font-size:19px;text-align:center}#billv .np{display:none}#billv{z-index:30}
+#calc{position:relative}#sug{position:absolute;order:0;left:10px;right:10px;max-height:none;overflow:hidden;border:1.5px solid var(--acc);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.4);background:var(--bg);z-index:15}#sug th{display:none}#sug td{padding:12px;border-bottom:1px solid var(--line);font-size:19px;color:var(--fg)}#sug tr:last-child td{border-bottom:0}#sug td:first-child{color:#888;width:34px;padding-right:0}#sug td:nth-child(2){width:64px}#sug td:nth-child(2){font-weight:700;color:var(--acc)}#sug td:last-child{color:var(--fg)}#sug tr:active td{background:var(--card)}
 #billv .bs td{border-bottom:1.5px solid #000}#billv .bs .rx{background:none;border:1.5px solid #c62828;color:#c62828;border-radius:6px;font-size:18px;font-weight:700;padding:2px 9px}
 @page{size:58mm auto;margin:0}
 @media print{body{height:auto!important;overflow:visible;background:#fff}header,nav,#calc,#prod,#bills,#sales,#set,#drawer,#scrim,.bh button,.np{display:none!important}#billv{position:static;display:flex!important;color:#000;background:#fff}.bh{background:none;color:#000;display:block;padding:2mm}.bh b{font-size:16px}.bs{overflow:visible;padding:0 2mm}#billv .bs table{font-size:12px}#billv .bs th{font-size:11px}#billv .bs td{padding:5px 2px}#bshop{font-size:16px}#billv .bt{font-size:16px}}
@@ -91,7 +92,7 @@ function suggest(){
  r.forEach(function(x){var b=document.createElement('tr');b.innerHTML='<td>'+(P.indexOf(x)+1)+'</td><td>'+html(x.s)+'</td><td><b>'+html(x.n)+' '+x.p+'*</b></td>';
   b.onmousedown=function(e){e.preventDefault()};
   b.onclick=function(){var v=ed.value;var ins=x.n+' '+x.p+'*';ed.value=v.slice(0,w.s)+ins+v.slice(w.e);var c=w.s+ins.length;ed.focus();ed.setSelectionRange(c,c);run()};
-  tb.appendChild(b)})}
+  tb.appendChild(b)});var li=ed.value.slice(0,ed.selectionStart).split('\n').length-1;box.style.top=($('wrap').offsetTop+8+(li+1)*32+4)+'px'}
 ed.addEventListener('input',run);ed.addEventListener('keyup',suggest);ed.addEventListener('click',suggest);
 ed.addEventListener('keydown',function(e){if(e.key==='Tab'){var b=$('sug').firstChild;if(b){e.preventDefault();b.click()}}});
 $('new').onclick=function(){if(!ed.value||confirm('Clear note?')){ed.value='';run()}};
@@ -161,6 +162,6 @@ $('save').onclick=function(){var tot=sumTxt(ed.value),b=this;if(!tot){b.textCont
  curId=null;saveB();ed.value='';run();b.textContent='✅';setTimeout(function(){b.textContent='💾'},900)};
 function peekNo(){var n=0;try{n=+localStorage.getItem('cn_n')||0}catch(e){}return n+1}
 function billNo(){var x=curId?B.filter(function(z){return z.id===curId})[0]:null;return x?(x.no||B.length-B.indexOf(x)):peekNo()}
-function fit(){var H=document.querySelector('header'),N=$('t1').parentNode,T=$('tot'),a=H.offsetHeight,b=N.offsetHeight;N.style.top=a+'px';T.style.top=(a+b)+'px';$('sug').style.top=(a+b+T.offsetHeight)+'px'}fit();window.addEventListener('resize',fit);
+function fit(){var H=document.querySelector('header'),N=$('t1').parentNode,T=$('tot'),a=H.offsetHeight,b=N.offsetHeight;N.style.top=a+'px';T.style.top=(a+b)+'px'}fit();window.addEventListener('resize',fit);
 if(!ed.value)ed.value='kings 219*6';run();
 </script></body></html>
