@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>CalcNote</title>
+<html lang="en"><head><meta charset="utf-8"><title>Shiva Kiranam</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style id="pg">@page{size:58mm 200mm;margin:0}</style>
 <style>
@@ -31,13 +31,26 @@ nav button{flex:1;padding:14px;border:0;background:none;color:#888;font-size:16p
 nav .on2{color:var(--acc);border-top-color:var(--acc)}
 #billv{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9;background:var(--bg);flex-direction:column;padding-top:env(safe-area-inset-top,0px)}.bh{background:var(--bar);color:#fff;display:flex;align-items:center;gap:12px;padding:12px 16px;font-size:20px}.bh b{font-weight:500}.bh span{flex:1;font-size:12px;opacity:.85}.bh button{background:none;border:0;color:#fff;font-size:22px}.bs{flex:1;overflow:auto;padding:12px}.bs table{width:100%;border-collapse:collapse;font-size:17px}.bs th{text-align:left;color:#888;font-size:14px;padding:6px 4px;border-bottom:1px solid var(--line)}.bs td{padding:10px 4px;border-bottom:1px solid var(--line)}.bs th:nth-child(n+3),.bs td:nth-child(n+3){text-align:right}.bt{display:flex;justify-content:space-between;font-size:22px;font-weight:700;padding:14px 4px;border-top:2px solid var(--fg);margin-top:8px}
 #bills,#sales,#set{padding:0 12px 16px;overflow-y:auto}#set{padding-top:8px}#set label{display:block;margin-top:16px;color:#888;font-size:14px}#set input{margin-top:6px}#sv{margin-top:20px;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:12px 24px;font-size:18px;align-self:flex-start}#bshop{text-align:center;font-size:22px;font-weight:700;padding:4px 0 10px}#blist{padding-top:4px}.emp{color:#888;text-align:center;margin-top:24px}#scards{display:flex;gap:10px;margin-top:12px}.sc{flex:1;background:var(--card);border-radius:10px;padding:12px}.sc b{display:block;font-size:26px;margin:4px 0}.sc small{color:#888}#sd{margin-top:12px}#sdays table{width:100%;border-collapse:collapse;margin-top:14px;font-size:17px}#sdays th{text-align:left;color:#888;font-size:14px;padding:6px 4px;border-bottom:1px solid var(--line)}#sdays td{padding:11px 4px;border-bottom:1px solid var(--line)}#sdays th:nth-child(n+2),#sdays td:nth-child(n+2){text-align:right}
-#scrim{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:19}#drawer{position:fixed;top:0;bottom:0;left:0;width:260px;max-width:80%;background:var(--bg);z-index:20;transform:translateX(-105%);transition:transform .2s;padding-top:env(safe-area-inset-top,0px)}#drawer.open{transform:none}.dh{background:var(--bar);color:#fff;padding:20px 16px}.dh b{font-size:22px;font-weight:500}.dh small{display:block;margin-top:14px;opacity:.85}#dts{font-size:26px;font-weight:600}#drawer button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);font-size:18px;padding:16px}#drawer button.cur{color:var(--acc);background:var(--card)}
+#scrim{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:19}#drawer{position:fixed;top:0;bottom:0;left:0;width:280px;max-width:84%;background:var(--bg);z-index:20;transform:translateX(-105%);transition:transform .2s;padding-top:env(safe-area-inset-top,0px)}#drawer.open{transform:none}.dh{background:var(--bar);color:#fff;padding:20px 16px}.dh b{font-size:22px;font-weight:500}.dh small{display:block;margin-top:14px;opacity:.85}#dts{font-size:26px;font-weight:600}#drawer button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);font-size:18px;padding:16px}#drawer button.cur{color:var(--acc);background:var(--card)}
 #billv{background:#fff;color:#000}#billv .bh{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}#billv .bh b{font-size:24px;font-weight:600}#billv .bh button{font-size:30px;padding:0 8px}#billv .bs{color:#000}#billv .bs table{font-size:23px;font-weight:700}#billv .bs th{color:#000;font-size:17px;font-weight:800;border-bottom:2px solid #000}#billv .bs td{padding:15px 4px;border-bottom:1px solid #888}#billv .bt{font-size:32px;font-weight:800;border-top:3px solid #000}#bshop{color:#000}
 html,body{height:auto!important}body{display:flex!important;flex-direction:column;overflow:visible!important;min-height:100vh!important}header{position:sticky;top:0;z-index:12;order:-2}nav{position:sticky;order:-1;z-index:11}#calc{flex:none}#tot{position:sticky;order:1;z-index:10}#sug{position:sticky;order:2;z-index:9}#wrap{order:3;overflow:visible}#prod,#bills,#sales,#set{flex:none;overflow:visible}#q{position:static;box-shadow:none}
 #gut,#ed,#res,#xs{background-image:linear-gradient(to bottom,transparent 31px,rgba(128,128,128,.5) 31px);background-size:100% 32px;background-position:0 8px}#xs{width:40px;flex:none;padding:8px 0;overflow:hidden}#xs button,#xs span{display:block;height:32px;width:100%;line-height:32px;padding:0;border:0;background:none;color:#c62828;font-size:19px;text-align:center}#billv .np{display:none}#billv{z-index:30}
-.rb{padding:12px 16px;border-bottom:1px solid var(--line);font-size:18px}#drawer .rb button.rg{display:inline-block;width:auto;margin:10px 10px 0 0;border:1px solid var(--acc);color:var(--acc);border-radius:20px;padding:8px 20px;font-size:18px}
+.rb{padding:12px 16px;border-bottom:1px solid var(--line);font-size:18px}#drawer .rb button.rg{display:inline-block;width:auto;margin:10px 10px 0 0;border:1px solid var(--acc);color:var(--acc);border-radius:20px;padding:8px 14px;font-size:18px}
 #calc{position:relative}#sug{position:absolute;order:0;left:10px;right:10px;max-height:none;overflow:hidden;border:1.5px solid var(--acc);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.4);background:var(--bg);z-index:15}#sug th{display:none}#sug td{padding:12px;border-bottom:1px solid var(--line);font-size:19px;color:var(--fg)}#sug tr:last-child td{border-bottom:0}#sug td:first-child{color:#888;width:34px;padding-right:0}#sug td:nth-child(2){width:64px}#sug td:nth-child(2){font-weight:700;color:var(--acc)}#sug td:last-child{color:var(--fg)}#sug tr:active td{background:var(--card)}
 #billv .bs td{border-bottom:1.5px solid #000}#billv .bs .rx{background:none;border:1.5px solid #c62828;color:#c62828;border-radius:6px;font-size:18px;font-weight:700;padding:2px 9px}
+
+/* ===== TABLES (products + saved bills) ===== */
+.ptools{display:flex;align-items:center;justify-content:space-between;margin-top:12px}.ptools b{font-weight:600;color:#888}.ptools button{background:none;border:1.5px solid #c62828;color:#c62828;border-radius:8px;padding:8px 14px;font-size:15px;font-weight:600}
+.tb{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px;border:1px solid var(--line)}
+.tb th{background:var(--gut);text-align:left;padding:9px 6px;font-size:13px;color:#666;border-bottom:1px solid var(--line)}
+.tb td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tb td small{display:block;color:#888;font-size:12px}
+.tb .r{text-align:right}.tb .c{text-align:center}
+.tb .x{background:none;border:0;color:#c62828;font-size:18px;padding:4px}
+.pt{table-layout:fixed}.pt th:nth-child(1),.pt td:nth-child(1){width:30px}.pt th:nth-child(3),.pt td:nth-child(3){width:62px}.pt th:nth-child(4),.pt td:nth-child(4){width:72px}.pt th:nth-child(5),.pt td:nth-child(5){width:36px}
+.pt td{padding:5px 3px}.pt input{font-size:15px;padding:8px 6px;border-radius:6px}
+#bmeta{text-align:center;font-size:14px;font-weight:600;color:#000;padding-bottom:8px}
+#billv .bs table{border:2px solid #000}#billv .bs th,#billv .bs td{border:1.5px solid #000}#billv .bs th{background:#eee}
 
 /* ===== BILL OPEN: bill becomes the whole page, full length, no inner scroll (so every item is captured when printing) ===== */
 body.bo{display:block!important;height:auto!important;min-height:0!important;overflow:visible!important}
@@ -62,7 +75,7 @@ body.bo #billv .bs{display:block!important;height:auto!important;overflow:visibl
  #billv .bt{display:flex;font-size:16px;page-break-inside:avoid}
 }
 </style><style id="bfit"></style></head><body>
-<header><button id="mn">☰</button><b><span id="ttl">CalcNote</span><small id="shp" style="display:none;font-size:12px;font-weight:400;opacity:.9"></small></b><button id="bl" title="Bill preview">🧾</button><button id="new" title="New">+</button><button id="save" title="Save" style="display:none">💾</button></header>
+<header><button id="mn">☰</button><b><span id="ttl">Shiva Kiranam</span><small id="shp" style="display:none;font-size:12px;font-weight:400;opacity:.9"></small></b><button id="bl" title="Bill preview">🧾</button><button id="new" title="New">+</button><button id="save" title="Save" style="display:none">💾</button></header>
 <section id="calc" class="on">
  <div id="wrap"><div id="gut">1</div><textarea id="ed" wrap="off" spellcheck="false" autocapitalize="off" placeholder="k*6"></textarea><div id="res"></div><div id="xs"></div></div>
  <div id="sug"></div>
@@ -70,14 +83,14 @@ body.bo #billv .bs{display:block!important;height:auto!important;overflow:visibl
 </section>
 <section id="prod">
  <input id="q" type="search" placeholder="Search product (k, vg…)">
- <div id="list"></div>
+ <div class="ptools"><b id="pcnt"></b><button id="pda">🗑 Delete all</button></div><div id="list"></div>
  <div class="add"><input id="an" placeholder="Name"><input id="as" placeholder="Short"><input id="ap" type="number" placeholder="Price"><button id="ab">Add</button></div><div style="margin-top:18px;font-weight:600">Bulk add</div><textarea id="bulk" rows="5" placeholder="chota advans 90 ca&#10;vimal 130 vl" style="display:block;width:100%;min-height:130px;resize:vertical;margin-top:6px;font:17px/1.5 Roboto,Arial,sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)"></textarea><div class="add" style="grid-template-columns:1fr auto"><small id="bmsg" style="color:#888;align-self:center">One per line: name price short</small><button id="bb">Add all</button></div>
 </section>
 <section id="bills"><div id="blist"></div></section>
 <section id="sales"><input type="date" id="sd"><div id="scards"></div><div id="sdays"></div></section>
-<section id="set"><label>App name</label><input id="sa" placeholder="CalcNote"><label>Shop name</label><input id="ss" placeholder="e.g. Dhanalaxmi"><label>Bottom gap (px) — raise if the bottom is hidden</label><input id="sg" type="number" placeholder="auto"><button id="sv">Save</button><p id="smsg" style="color:#2e7d32"></p></section>
-<div id="scrim"></div><aside id="drawer"><div class="dh"><b id="dtl">CalcNote</b><small>Today's sales</small><div id="dts">0</div></div><button data-v="1">🧮 Calculator</button><button data-v="2">📦 Products</button><button data-v="3">🧾 Saved Bills</button><button data-v="4">📊 Sales (calendar)</button><button data-v="5">⚙️ Settings</button><div class="rb"><div>🎲 Random bill</div><button class="rg" data-n="5">5</button><button class="rg" data-n="10">10</button><button class="rg" data-n="15">15</button></div><button id="smp">📥 Add 20 sample products</button></aside>
-<div id="billv"><div class="bh"><b id="bno">Bill</b><button id="bclose">🏠</button><span id="bdate" style="display:none"></span></div><div class="bs"><div id="bshop"></div><table><thead><tr><th>#</th><th>Item</th><th>Qty</th><th>Rate</th><th>Total</th><th class="np"></th></tr></thead><tbody id="bbody"></tbody></table><div class="bt"><span>Total</span><span id="btot"></span></div></div></div>
+<section id="set"><label>App name</label><input id="sa" placeholder="Shiva Kiranam"><label>Shop name</label><input id="ss" placeholder="Shiva Kiranam"><label>Bottom gap (px) — raise if the bottom is hidden</label><input id="sg" type="number" placeholder="auto"><button id="sv">Save</button><p id="smsg" style="color:#2e7d32"></p></section>
+<div id="scrim"></div><aside id="drawer"><div class="dh"><b id="dtl">Shiva Kiranam</b><small>Today's sales</small><div id="dts">0</div></div><button data-v="1">🧮 Calculator</button><button data-v="2">📦 Products</button><button data-v="3">🧾 Saved Bills</button><button data-v="4">📊 Sales (calendar)</button><button data-v="5">⚙️ Settings</button><div class="rb"><div>🎲 Random bill</div><button class="rg" data-n="5">5</button><button class="rg" data-n="10">10</button><button class="rg" data-n="15">15</button><button class="rg" data-n="50">50</button></div><button id="smp">📥 Add 60 sample products</button></aside>
+<div id="billv"><div class="bh"><b id="bno">Bill</b><button id="bclose">🏠</button><span id="bdate" style="display:none"></span></div><div class="bs"><div id="bshop"></div><div id="bmeta"></div><table><thead><tr><th>#</th><th>Item</th><th>Qty</th><th>Rate</th><th>Total</th><th class="np"></th></tr></thead><tbody id="bbody"></tbody></table><div class="bt"><span>Total</span><span id="btot"></span></div></div></div>
 <nav><button id="t1" class="on2">Calculator</button><button id="t2">Products</button></nav>
 <script>
 var P=[{n:'kings',s:'k',p:219},{n:'vimal gutka',s:'vg',p:230}],ed=document.getElementById('ed');
@@ -98,11 +111,12 @@ function ev(line){
  try{var v=Function('"use strict";return ('+s+')')();return isFinite(v)?v:null}catch(e){return null}}
 function html(l){return l.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 function run(){
- var L=ed.value.split('\n'),out=[],tot=0;
+ var L=ed.value.split('\n'),out=[],tot=0,N=Math.max(L.length,50);
  L.forEach(function(l){var v=ev(l);if(v===null)out.push('');else{out.push(fmt(v));tot+=v}});
  $('res').textContent=out.join('\n');
- $('gut').textContent=L.map(function(_,i){return i+1}).join('\n');
- var h=Math.max(L.length,18)*32+16;ed.style.height=h+'px';$('res').style.height=h+'px';$('gut').style.height=h+'px';$('xs').style.height=h+'px';$('xs').innerHTML=L.map(function(t,i){return t.trim()?'<button data-l="'+i+'">✕</button>':'<span></span>'}).join('');
+ var g=[];for(var i=1;i<=N;i++)g.push(i);$('gut').textContent=g.join('\n');
+ var h=N*32+16;ed.style.height=h+'px';$('res').style.height=h+'px';$('gut').style.height=h+'px';$('xs').style.height=h+'px';
+ $('xs').innerHTML=L.map(function(t,i){return t.trim()?'<button data-l="'+i+'">✕</button>':'<span></span>'}).join('');
  $('tv').textContent=fmt(tot);suggest();persist()}
 function word(){var c=ed.selectionStart,t=ed.value.slice(0,c),m=t.match(/([a-zA-Z]+)$/);return m?{w:m[1],s:c-m[1].length,e:c}:null}
 function suggest(){
@@ -123,15 +137,26 @@ $('save').onclick=function(){persist();this.textContent='✅';var b=this;setTime
 function tab(n){$('calc').classList.toggle('on',n==1);$('prod').classList.toggle('on',n==2);$('t1').classList.toggle('on2',n==1);$('t2').classList.toggle('on2',n==2);if(n==2)draw()}
 $('t1').onclick=function(){tab(1)};$('t2').onclick=function(){tab(2)};
 function draw(){
- var q=$('q').value.toLowerCase(),box=$('list');box.innerHTML='';
- P.forEach(function(x,i){if(q&&(x.n+' '+x.s).toLowerCase().indexOf(q)<0)return;
-  var r=document.createElement('div');r.className='row';
-  r.innerHTML='<span style="width:24px;color:#888">'+(i+1)+'</span><div class="n">'+html(x.n)+'<small>short: '+html(x.s)+'</small></div><input type="number" value="'+x.p+'"><button class="x">✕</button>';
-  r.querySelector('input').onchange=function(){x.p=+this.value||0;persist()};
-  r.querySelector('.x').onclick=function(){P.splice(i,1);persist();draw()};
-  box.appendChild(r)});
- if(!box.children.length)box.innerHTML='<p style="color:#888;text-align:center;margin-top:24px">No product found</p>'}
+ var q=$('q').value.toLowerCase(),box=$('list'),shown=0;
+ var tb=document.createElement('table');tb.className='tb pt';
+ tb.innerHTML='<thead><tr><th>#</th><th>Product name</th><th>Short</th><th>Rate</th><th></th></tr></thead>';
+ var body=document.createElement('tbody');
+ P.forEach(function(x,i){
+  if(q&&(x.n+' '+(x.s||'')).toLowerCase().indexOf(q)<0)return;shown++;
+  var r=document.createElement('tr');
+  r.innerHTML='<td class="c">'+(i+1)+'</td><td><input class="in-n"></td><td><input class="in-s" autocapitalize="off"></td><td><input class="in-p" type="number" inputmode="decimal"></td><td class="c"><button class="x">✕</button></td>';
+  var nI=r.querySelector('.in-n'),sI=r.querySelector('.in-s'),pI=r.querySelector('.in-p');
+  nI.value=x.n;sI.value=x.s||'';pI.value=x.p;
+  nI.onchange=function(){var v=this.value.trim();if(!v){this.value=x.n;return}x.n=v;this.value=v;persist()};
+  sI.onchange=function(){x.s=this.value.trim();persist()};
+  pI.onchange=function(){x.p=+this.value||0;persist()};
+  r.querySelector('.x').onclick=function(){if(confirm('Delete '+x.n+'?')){P.splice(P.indexOf(x),1);persist();draw()}};
+  body.appendChild(r)});
+ tb.appendChild(body);box.innerHTML='';
+ if(shown)box.appendChild(tb);else box.innerHTML='<p class="emp">No product found</p>';
+ $('pcnt').textContent=P.length+' products'}
 $('q').oninput=draw;
+$('pda').onclick=function(){if(!P.length)return;if(confirm('Delete ALL '+P.length+' products? This cannot be undone.')){P=[];persist();draw()}};
 $('bb').onclick=function(){var n=0;$('bulk').value.split('\n').forEach(function(l){var m=l.trim().match(/^(.+?)\s+(\d+(?:\.\d+)?)\s*([a-zA-Z]*)$/);if(!m)return;var nm=m[1].trim(),ex=P.filter(function(x){return x.n.toLowerCase()===nm.toLowerCase()})[0];if(ex){ex.p=+m[2];if(m[3])ex.s=m[3]}else P.push({n:nm,s:m[3],p:+m[2]});n++});$('bulk').value='';$('bmsg').textContent=n+' added/updated';persist();draw()};
 $('ab').onclick=function(){var n=$('an').value.trim(),p=+$('ap').value;if(!n||!p)return;P.push({n:n,s:$('as').value.trim(),p:p});$('an').value=$('as').value=$('ap').value='';persist();draw()};
 function findP(l){var best=null;P.slice().sort(function(a,b){return b.n.length-a.n.length}).some(function(x){return [x.n,x.s].some(function(k){if(!k)return false;var m=new RegExp('(^|[^a-zA-Z])('+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')(?![a-zA-Z])','i').exec(l);if(m){best={p:x,rest:l.slice(m.index+m[1].length+m[2].length)};return true}return false})});return best}
@@ -149,23 +174,30 @@ window.addEventListener('beforeprint',setPage);
 function gapPx(){var g=(typeof S!=='undefined')?S.g:null;return(g===''||g==null||isNaN(+g))?90:+g}
 /* Shrink rows so the whole bill fits on ONE screen (works well up to ~20 items; longer bills just scroll and print via "All Pages") */
 function fitBill(){
- var n=$('bbody').querySelectorAll('tr').length||1,gap=gapPx(),avail=window.innerHeight-gap-150;
+ var n=$('bbody').querySelectorAll('tr').length||1,gap=gapPx(),avail=window.innerHeight-gap-230;
  var rh=Math.max(26,Math.min(46,avail/n)),fs=Math.max(12,Math.min(23,Math.floor(rh*0.5))),pd=Math.max(2,Math.floor((rh-fs*1.2)/2));
- $('bfit').textContent='body.bo #billv .bs{padding-bottom:'+gap+'px!important}body.bo #billv .bs table{font-size:'+fs+'px!important}body.bo #billv .bs th{font-size:'+Math.max(11,fs-4)+'px!important}body.bo #billv .bs td{padding:'+pd+'px 4px!important}body.bo #billv .bt{font-size:'+Math.min(32,fs+8)+'px!important}'}
+ $('bfit').textContent='body.bo #billv .bs{padding-bottom:'+gap+'px!important}body.bo #billv .bs table{font-size:'+fs+'px!important}body.bo #billv .bs th{font-size:'+Math.max(11,fs-4)+'px!important}body.bo #billv .bs td{padding:'+pd+'px 5px!important}body.bo #billv .bt{font-size:'+Math.min(32,fs+8)+'px!important}'}
 window.addEventListener('resize',fitBill);
 
+function parseLine(l){var v=ev(l);if(v===null)return null;var f=findP(l),item,qty='',rate='';
+ if(f){item=f.p.n;var r=f.rest.replace(/,/g,'').trim(),m;
+  if(m=r.match(/^(\d+(?:\.\d+)?)\s*[*x]\s*(\d+(?:\.\d+)?)$/i)){rate=+m[1];qty=+m[2]}
+  else if(m=r.match(/^[*x]\s*(\d+(?:\.\d+)?)$/i)){rate=f.p.p;qty=+m[1]}
+  else{rate=v;qty=1}}
+ else{item=l.replace(/[^a-zA-Z ]/g,'').trim()||'Item'}
+ return{item:item,qty:qty,rate:rate,v:v}}
+function billStats(txt){var n=0,q=0;txt.split('\n').forEach(function(l){var p=parseLine(l);if(!p)return;n++;if(typeof p.qty==='number')q+=p.qty});return{n:n,q:q}}
 function showBill(){autoSave();var rows=[],tot=0,n=0;
- ed.value.split('\n').forEach(function(l,li){var v=ev(l);if(v===null)return;n++;var f=findP(l),item,qty='',rate='';
-  if(f){item=f.p.n;var r=f.rest.replace(/,/g,'').trim(),m;
-   if(m=r.match(/^(\d+(?:\.\d+)?)\s*[*x]\s*(\d+(?:\.\d+)?)$/i)){rate=+m[1];qty=+m[2]}
-   else if(m=r.match(/^[*x]\s*(\d+(?:\.\d+)?)$/i)){rate=f.p.p;qty=+m[1]}
-   else{rate=v;qty=1}}
-  else{item=l.replace(/[^a-zA-Z ]/g,'').trim()||'Item'}
-  tot+=v;rows.push('<tr><td>'+n+'</td><td>'+html(item)+'</td><td>'+qty+'</td><td>'+(rate===''?'':fmt(rate))+'</td><td>'+fmt(v)+'</td><td class="np"><button class="rx" data-l="'+li+'">✕</button></td></tr>')});
+ ed.value.split('\n').forEach(function(l,li){var p=parseLine(l);if(!p)return;n++;tot+=p.v;
+  rows.push('<tr><td>'+n+'</td><td>'+html(p.item)+'</td><td>'+p.qty+'</td><td>'+(p.rate===''?'':fmt(p.rate))+'</td><td>'+fmt(p.v)+'</td><td class="np"><button class="rx" data-l="'+li+'">✕</button></td></tr>')});
  $('bbody').innerHTML=rows.join('')||'<tr><td colspan="6" style="text-align:center;color:#888">No items</td></tr>';
- $('btot').textContent=fmt(tot);$('bno').textContent='Bill #'+billNo();Array.prototype.forEach.call($('bbody').querySelectorAll('.rx'),function(b){b.onclick=function(){var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run();showBill()}});$('billv').style.display='flex';document.body.classList.add('bo');fitBill();window.scrollTo(0,0);setPage()}
+ $('btot').textContent=fmt(tot);$('bno').textContent='Bill #'+billNo();
+ var cb=curId?B.filter(function(z){return z.id===curId})[0]:null,dt=new Date(cb?cb.t:Date.now());
+ $('bmeta').textContent=dt.toLocaleDateString()+'   '+dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+ Array.prototype.forEach.call($('bbody').querySelectorAll('.rx'),function(b){b.onclick=function(){var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run();showBill()}});
+ $('billv').style.display='flex';document.body.classList.add('bo');fitBill();window.scrollTo(0,0);setPage()}
 ed.addEventListener('input',function(e){var v=ed.value,c=ed.selectionStart;if(e.data===' '&&c===v.length){var ln=v.slice(v.lastIndexOf('\n',c-2)+1,c-1);if(/[*x]\s*\d+(\.\d+)?$/i.test(ln)&&ev(ln)!==null){ed.value=v.slice(0,c-1)+'\n';ed.setSelectionRange(c,c);run()}}});
-var SAMPLE=[['Parle G',10,'pg'],['Maggi Noodles',14,'mg'],['Lays Chips',20,'ly'],['Kurkure',20,'kr'],['Good Day Biscuit',10,'gd'],['Dairy Milk',20,'dm'],['Sprite',40,'sp'],['Coca Cola',40,'cc'],['Water Bottle',20,'wb'],['Dove Soap',55,'ds'],['Lux Soap',35,'lx'],['Colgate',60,'cg'],['Clinic Plus',2,'cp'],['Surf Excel',10,'se'],['Tata Salt',28,'ts'],['Sugar',45,'sg'],['Eggs',7,'eg'],['Milk Packet',30,'ml'],['Bread',40,'br'],['Queen Cake',10,'qc']];
+var SAMPLE=[['Parle G',10,'pg'],['Maggi Noodles',14,'mg'],['Lays Chips',20,'ly'],['Kurkure',20,'kr'],['Good Day Biscuit',10,'gd'],['Dairy Milk',20,'dm'],['Sprite',40,'sp'],['Coca Cola',40,'cc'],['Water Bottle',20,'wb'],['Dove Soap',55,'ds'],['Lux Soap',35,'lx'],['Colgate',60,'cg'],['Clinic Plus',2,'cp'],['Surf Excel',10,'se'],['Tata Salt',28,'ts'],['Sugar',45,'sg'],['Eggs',7,'eg'],['Milk Packet',30,'ml'],['Bread',40,'br'],['Queen Cake',10,'qc'],['Bourbon Biscuit',30,'bo'],['Marie Gold',10,'mr'],['Oreo',30,'oe'],['Tiger Biscuit',10,'tg'],['Pepsi',40,'pe'],['Thums Up',40,'tu'],['Fanta',40,'fa'],['Maaza',20,'mz'],['Frooti',20,'fr'],['Red Bull',125,'rb'],['Tea Powder',10,'tp'],['Taj Mahal Tea',10,'tm'],['Coffee Sachet',5,'cf'],['Lifebuoy Soap',30,'lb'],['Pears Soap',60,'pr'],['Santoor Soap',40,'sn'],['Sunsilk Sachet',3,'sk'],['Vim Bar',10,'vb'],['Rin Bar',10,'rn'],['Wheel Powder',10,'wh'],['Ariel',10,'ar'],['Harpic',30,'hp'],['Colin',20,'co'],['Odonil',10,'od'],['Good Knight',20,'gk'],['Atta 1kg',45,'ak'],['Rice 1kg',55,'rc'],['Toor Dal 1kg',140,'td'],['Oil Packet 1L',150,'oi'],['Jaggery 1kg',60,'jg'],['Turmeric Powder',10,'tr'],['Chilli Powder',10,'ch'],['Mustard Seeds',10,'ms'],['Cumin Seeds',10,'jr'],['Pen',10,'pn'],['Notebook',30,'nb'],['Pencil',5,'pc'],['Matchbox',2,'mb'],['Agarbatti',10,'ag'],['Candle Packet',20,'cd']];
 function addSample(){var n=0;SAMPLE.forEach(function(x){if(!P.some(function(y){return y.n.toLowerCase()===x[0].toLowerCase()})){P.push({n:x[0],s:x[2],p:x[1]});n++}});persist();return n}
 function randBill(c){var a=P.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}ed.value=a.slice(0,Math.min(c,a.length)).map(function(x){return x.n+' '+x.p+'*'+(1+Math.floor(Math.random()*10))}).join('\n');curId=null;run();tab(1)}
 Array.prototype.forEach.call(document.querySelectorAll('.rg'),function(b){b.onclick=function(){var c=+b.getAttribute('data-n');if(P.length<c)addSample();randBill(c)}});
@@ -177,13 +209,17 @@ function saveB(){try{localStorage.setItem('cn_b',JSON.stringify(B))}catch(e){}}
 function dk(t){var d=new Date(t);return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function sumTxt(txt){var s=0;txt.split('\n').forEach(function(l){var v=ev(l);if(v!==null)s+=v});return s}
 function todayTot(){var k=dk(Date.now()),s=0;B.forEach(function(b){if(dk(b.t)===k)s+=b.total});return s}
-function drawBills(){var box=$('blist');box.innerHTML='';if(!B.length){box.innerHTML='<p class="emp">No saved bills yet. Tap the save button to save a bill.</p>';return}
- B.forEach(function(b){var d=new Date(b.t),c=document.createElement('div');c.className='row';c.style.cursor='pointer';
-  var pv=b.txt.split('\n').filter(function(x){return x.trim()}).slice(0,2).join(' · ');
-  c.innerHTML='<div class="n"><b>'+(b.no?'#'+b.no+' · ':'')+html(d.toLocaleDateString())+' '+html(d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}))+'</b><small>'+html(pv)+'</small></div><b>'+fmt(b.total)+'</b><button class="x">✕</button>';
-  c.onclick=function(){ed.value=b.txt;curId=b.id;run();tab(1);showBill()};
-  c.querySelector('.x').onclick=function(e){e.stopPropagation();if(confirm('Delete this bill?')){B=B.filter(function(z){return z.id!==b.id});saveB();drawBills()}};
-  box.appendChild(c)})}
+function drawBills(){var box=$('blist');box.innerHTML='';
+ if(!B.length){box.innerHTML='<p class="emp">No saved bills yet. Open a bill with the receipt button and it saves automatically.</p>';return}
+ var tb=document.createElement('table');tb.className='tb';
+ tb.innerHTML='<thead><tr><th>Bill</th><th>Date</th><th class="r">Items</th><th class="r">Qty</th><th class="r">Total</th><th></th></tr></thead>';
+ var body=document.createElement('tbody');
+ B.forEach(function(b){var d=new Date(b.t),st=billStats(b.txt),r=document.createElement('tr');r.style.cursor='pointer';
+  r.innerHTML='<td><b>#'+(b.no||(B.length-B.indexOf(b)))+'</b></td><td>'+html(d.toLocaleDateString())+'<small>'+html(d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}))+'</small></td><td class="r">'+st.n+'</td><td class="r">'+fmt(st.q)+'</td><td class="r"><b>'+fmt(b.total)+'</b></td><td class="c"><button class="x">✕</button></td>';
+  r.onclick=function(){ed.value=b.txt;curId=b.id;run();tab(1);showBill()};
+  r.querySelector('.x').onclick=function(e){e.stopPropagation();if(confirm('Delete this bill?')){B=B.filter(function(z){return z.id!==b.id});saveB();drawBills()}};
+  body.appendChild(r)});
+ tb.appendChild(body);box.appendChild(tb)}
 function drawSales(){var sd=$('sd');if(!sd.value)sd.value=dk(Date.now());var k=sd.value,tt=0,tc=0,st=0,sc=0,days={},td=dk(Date.now());
  B.forEach(function(b){var d=dk(b.t);days[d]=days[d]||{s:0,c:0};days[d].s+=b.total;days[d].c++;if(d===td){tt+=b.total;tc++}if(d===k){st+=b.total;sc++}});
  $('scards').innerHTML='<div class="sc"><small>Today</small><b>'+fmt(tt)+'</b><small>'+tc+' bills</small></div><div class="sc"><small>'+html(k)+'</small><b>'+fmt(st)+'</b><small>'+sc+' bills</small></div>';
@@ -192,9 +228,9 @@ function drawSales(){var sd=$('sd');if(!sd.value)sd.value=dk(Date.now());var k=s
  $('sdays').innerHTML=ks.length?h+'</tbody></table>':'<p class="emp">No sales yet.</p>';
  Array.prototype.forEach.call($('sdays').querySelectorAll('tr[data-d]'),function(r){r.onclick=function(){sd.value=r.getAttribute('data-d');drawSales()}})}
 $('sd').onchange=drawSales;
-var S={a:'CalcNote',s:''};try{var q0=JSON.parse(localStorage.getItem('cn_s')||'null');if(q0)S=q0}catch(e){}
-function applySet(){$('ttl').textContent=S.a||'CalcNote';$('shp').textContent=S.s;$('shp').style.display=S.s?'block':'none';$('dtl').textContent=S.s||S.a||'CalcNote';$('bshop').textContent=S.s;document.title=S.a||'CalcNote'}
-$('sv').onclick=function(){S={a:$('sa').value.trim()||'CalcNote',s:$('ss').value.trim(),g:$('sg').value};try{localStorage.setItem('cn_s',JSON.stringify(S))}catch(e){}applySet();fit();fitBill();$('smsg').textContent='Saved ✓'};
+var S={a:'Shiva Kiranam',s:'Shiva Kiranam'};try{var q0=JSON.parse(localStorage.getItem('cn_s')||'null');if(q0)S=q0}catch(e){}if(!S.a||S.a==='CalcNote')S.a='Shiva Kiranam';if(!S.s)S.s='Shiva Kiranam';
+function applySet(){var t=S.a||'Shiva Kiranam';$('ttl').textContent=t;$('shp').textContent=S.s;$('shp').style.display=(S.s&&S.s!==t)?'block':'none';$('dtl').textContent=S.s||t;$('bshop').textContent=S.s||t;document.title=t}
+$('sv').onclick=function(){S={a:$('sa').value.trim()||'Shiva Kiranam',s:$('ss').value.trim(),g:$('sg').value};try{localStorage.setItem('cn_s',JSON.stringify(S))}catch(e){}applySet();fit();fitBill();$('smsg').textContent='Saved ✓'};
 applySet();
 function openD(){$('dts').textContent=fmt(todayTot());$('drawer').classList.add('open');$('scrim').style.display='block'}
 function closeD(){$('drawer').classList.remove('open');$('scrim').style.display='none'}
