@@ -50,7 +50,7 @@ html,body{height:auto!important}body{display:flex!important;flex-direction:colum
 .pt{table-layout:fixed}.pt th:nth-child(1),.pt td:nth-child(1){width:30px}.pt th:nth-child(3),.pt td:nth-child(3){width:62px}.pt th:nth-child(4),.pt td:nth-child(4){width:72px}.pt th:nth-child(5),.pt td:nth-child(5){width:36px}
 .pt td{padding:5px 3px}.pt input{font-size:15px;padding:8px 6px;border-radius:6px}
 #bmeta{text-align:center;font-size:14px;font-weight:600;color:#000;padding-bottom:8px}
-#billv .bs table{border:2px solid #000}#billv .bs th,#billv .bs td{border:1.5px solid #000}#billv .bs th{background:#eee}
+#billv .bs table{border:0}#billv .bs th,#billv .bs td{border:0;border-bottom:1.5px solid #000}#billv .bs th{background:none;border-bottom:2px solid #000}#billv .bs th:not(:nth-child(2)),#billv .bs td:not(:nth-child(2)){white-space:nowrap}
 
 /* ===== BILL OPEN: bill becomes the whole page, full length, no inner scroll (so every item is captured when printing) ===== */
 body.bo{display:block!important;height:auto!important;min-height:0!important;overflow:visible!important}
@@ -88,7 +88,7 @@ body.bo #billv .bs{display:block!important;height:auto!important;overflow:visibl
 </section>
 <section id="bills"><div id="blist"></div></section>
 <section id="sales"><input type="date" id="sd"><div id="scards"></div><div id="sdays"></div></section>
-<section id="set"><label>App name</label><input id="sa" placeholder="Shiva Kiranam"><label>Shop name</label><input id="ss" placeholder="Shiva Kiranam"><label>Bottom gap (px) — raise if the bottom is hidden</label><input id="sg" type="number" placeholder="auto"><button id="sv">Save</button><p id="smsg" style="color:#2e7d32"></p></section>
+<section id="set"><label>App name</label><input id="sa" placeholder="Shiva Kiranam"><label>Shop name</label><input id="ss" placeholder="Shiva Kiranam"><label>Bottom gap (px) — raise if the bottom is hidden</label><input id="sg" type="number" placeholder="auto"><label>Bill font size (px) — default 32 (same as Total), bigger = larger print</label><input id="sf" type="number" placeholder="32"><button id="sv">Save</button><p id="smsg" style="color:#2e7d32"></p></section>
 <div id="scrim"></div><aside id="drawer"><div class="dh"><b id="dtl">Shiva Kiranam</b><small>Today's sales</small><div id="dts">0</div></div><button data-v="1">🧮 Calculator</button><button data-v="2">📦 Products</button><button data-v="3">🧾 Saved Bills</button><button data-v="4">📊 Sales (calendar)</button><button data-v="5">⚙️ Settings</button><div class="rb"><div>🎲 Random bill</div><button class="rg" data-n="5">5</button><button class="rg" data-n="10">10</button><button class="rg" data-n="15">15</button><button class="rg" data-n="50">50</button></div><button id="smp">📥 Add 60 sample products</button></aside>
 <div id="billv"><div class="bh"><b id="bno">Bill</b><button id="bclose">🏠</button><span id="bdate" style="display:none"></span></div><div class="bs"><div id="bshop"></div><div id="bmeta"></div><table><thead><tr><th>#</th><th>Item</th><th>Qty</th><th>Rate</th><th>Total</th><th class="np"></th></tr></thead><tbody id="bbody"></tbody></table><div class="bt"><span>Total</span><span id="btot"></span></div></div></div>
 <nav><button id="t1" class="on2">Calculator</button><button id="t2">Products</button></nav>
@@ -165,18 +165,17 @@ function autoSave(){var tot=sumTxt(ed.value);if(!tot)return;var x=curId?B.filter
 /* Set the paper height to fit ALL items (58mm wide, height grows with item count) */
 function setPage(){
  var n=$('bbody').querySelectorAll('tr').length||1;
- var px=70+40+30+n*44+60;               /* header + shop + thead + rows (wrap-safe) + total */
+ var px=70+40+30+n*Math.round(fontPx()*2.6+22)+60;              /* header + shop + thead + rows (wrap-safe) + total */
  var mm=Math.ceil(px*25.4/96)+10;
  $('pg').textContent='@page{size:58mm '+mm+'mm;margin:0}'}
 window.addEventListener('beforeprint',setPage);
 
 /* Bottom gap: keeps the Total clear of the app's bottom toolbar. Uses Settings > Bottom gap, default 90px */
 function gapPx(){var g=(typeof S!=='undefined')?S.g:null;return(g===''||g==null||isNaN(+g))?90:+g}
-/* Shrink rows so the whole bill fits on ONE screen (works well up to ~20 items; longer bills just scroll and print via "All Pages") */
-function fitBill(){
- var n=$('bbody').querySelectorAll('tr').length||1,gap=gapPx(),avail=window.innerHeight-gap-230;
- var rh=Math.max(26,Math.min(46,avail/n)),fs=Math.max(12,Math.min(23,Math.floor(rh*0.5))),pd=Math.max(2,Math.floor((rh-fs*1.2)/2));
- $('bfit').textContent='body.bo #billv .bs{padding-bottom:'+gap+'px!important}body.bo #billv .bs table{font-size:'+fs+'px!important}body.bo #billv .bs th{font-size:'+Math.max(11,fs-4)+'px!important}body.bo #billv .bs td{padding:'+pd+'px 5px!important}body.bo #billv .bt{font-size:'+Math.min(32,fs+8)+'px!important}'}
+/* ONE big font for the whole bill: Item, Qty, Rate, Total and the Total line all use the same size (Settings > Bill font size, default 32px) */
+function fontPx(){var f=(typeof S!=='undefined')?+S.f:0;return(f>=14&&f<=44)?f:32}
+function fitBill(){var gap=gapPx(),fs=fontPx();
+ $('bfit').textContent='body.bo #billv .bs{padding-bottom:'+gap+'px!important}body.bo #billv .bs table{font-size:'+fs+'px!important;font-weight:800!important}body.bo #billv .bs td{font-weight:800!important}body.bo #billv .bs th{font-size:'+Math.max(14,fs-8)+'px!important}body.bo #billv .bs td{padding:11px 4px!important}body.bo #billv .bt{font-size:'+fs+'px!important;font-weight:800!important}'}
 window.addEventListener('resize',fitBill);
 
 function parseLine(l){var v=ev(l);if(v===null)return null;var f=findP(l),item,qty='',rate='';
@@ -230,11 +229,11 @@ function drawSales(){var sd=$('sd');if(!sd.value)sd.value=dk(Date.now());var k=s
 $('sd').onchange=drawSales;
 var S={a:'Shiva Kiranam',s:'Shiva Kiranam'};try{var q0=JSON.parse(localStorage.getItem('cn_s')||'null');if(q0)S=q0}catch(e){}if(!S.a||S.a==='CalcNote')S.a='Shiva Kiranam';if(!S.s)S.s='Shiva Kiranam';
 function applySet(){var t=S.a||'Shiva Kiranam';$('ttl').textContent=t;$('shp').textContent=S.s;$('shp').style.display=(S.s&&S.s!==t)?'block':'none';$('dtl').textContent=S.s||t;$('bshop').textContent=S.s||t;document.title=t}
-$('sv').onclick=function(){S={a:$('sa').value.trim()||'Shiva Kiranam',s:$('ss').value.trim(),g:$('sg').value};try{localStorage.setItem('cn_s',JSON.stringify(S))}catch(e){}applySet();fit();fitBill();$('smsg').textContent='Saved ✓'};
+$('sv').onclick=function(){S={a:$('sa').value.trim()||'Shiva Kiranam',s:$('ss').value.trim(),g:$('sg').value,f:$('sf').value};try{localStorage.setItem('cn_s',JSON.stringify(S))}catch(e){}applySet();fit();fitBill();$('smsg').textContent='Saved ✓'};
 applySet();
 function openD(){$('dts').textContent=fmt(todayTot());$('drawer').classList.add('open');$('scrim').style.display='block'}
 function closeD(){$('drawer').classList.remove('open');$('scrim').style.display='none'}
-function tab(n){['calc','prod','bills','sales','set'].forEach(function(id,i){$(id).classList.toggle('on',n==i+1)});$('t1').classList.toggle('on2',n==1);$('t2').classList.toggle('on2',n==2);if(n==2)draw();if(n==3)drawBills();if(n==4)drawSales();if(n==5){$('sa').value=S.a;$('ss').value=S.s;$('sg').value=S.g==null?'':S.g;$('smsg').textContent=''}Array.prototype.forEach.call(document.querySelectorAll('#drawer button[data-v]'),function(b){b.classList.toggle('cur',b.getAttribute('data-v')==n)});closeD()}
+function tab(n){['calc','prod','bills','sales','set'].forEach(function(id,i){$(id).classList.toggle('on',n==i+1)});$('t1').classList.toggle('on2',n==1);$('t2').classList.toggle('on2',n==2);if(n==2)draw();if(n==3)drawBills();if(n==4)drawSales();if(n==5){$('sa').value=S.a;$('ss').value=S.s;$('sg').value=S.g==null?'':S.g;$('sf').value=S.f==null?'':S.f;$('smsg').textContent=''}Array.prototype.forEach.call(document.querySelectorAll('#drawer button[data-v]'),function(b){b.classList.toggle('cur',b.getAttribute('data-v')==n)});closeD()}
 $('mn').onclick=openD;$('scrim').onclick=closeD;
 Array.prototype.forEach.call(document.querySelectorAll('#drawer button[data-v]'),function(b){b.onclick=function(){tab(+b.getAttribute('data-v'))}});
 $('new').onclick=function(){if(!ed.value||confirm('Clear note?')){ed.value='';curId=null;run()}};
