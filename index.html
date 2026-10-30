@@ -31,7 +31,10 @@ nav .on2{color:var(--acc);border-top-color:var(--acc)}
 #billv{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9;background:var(--bg);flex-direction:column;padding-top:env(safe-area-inset-top,0px)}.bh{background:var(--bar);color:#fff;display:flex;align-items:center;gap:12px;padding:12px 16px;font-size:20px}.bh b{font-weight:500}.bh span{flex:1;font-size:12px;opacity:.85}.bh button{background:none;border:0;color:#fff;font-size:22px}.bs{flex:1;overflow:auto;padding:12px}.bs table{width:100%;border-collapse:collapse;font-size:17px}.bs th{text-align:left;color:#888;font-size:14px;padding:6px 4px;border-bottom:1px solid var(--line)}.bs td{padding:10px 4px;border-bottom:1px solid var(--line)}.bs th:nth-child(n+3),.bs td:nth-child(n+3){text-align:right}.bt{display:flex;justify-content:space-between;font-size:22px;font-weight:700;padding:14px 4px;border-top:2px solid var(--fg);margin-top:8px}
 #bills,#sales,#set{padding:0 12px 16px;overflow-y:auto}#set{padding-top:8px}#set label{display:block;margin-top:16px;color:#888;font-size:14px}#set input{margin-top:6px}#sv{margin-top:20px;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:12px 24px;font-size:18px;align-self:flex-start}#bshop{text-align:center;font-size:22px;font-weight:700;padding:4px 0 10px}#blist{padding-top:4px}.emp{color:#888;text-align:center;margin-top:24px}#scards{display:flex;gap:10px;margin-top:12px}.sc{flex:1;background:var(--card);border-radius:10px;padding:12px}.sc b{display:block;font-size:26px;margin:4px 0}.sc small{color:#888}#sd{margin-top:12px}#sdays table{width:100%;border-collapse:collapse;margin-top:14px;font-size:17px}#sdays th{text-align:left;color:#888;font-size:14px;padding:6px 4px;border-bottom:1px solid var(--line)}#sdays td{padding:11px 4px;border-bottom:1px solid var(--line)}#sdays th:nth-child(n+2),#sdays td:nth-child(n+2){text-align:right}
 #scrim{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:19}#drawer{position:fixed;top:0;bottom:0;left:0;width:260px;max-width:80%;background:var(--bg);z-index:20;transform:translateX(-105%);transition:transform .2s;padding-top:env(safe-area-inset-top,0px)}#drawer.open{transform:none}.dh{background:var(--bar);color:#fff;padding:20px 16px}.dh b{font-size:22px;font-weight:500}.dh small{display:block;margin-top:14px;opacity:.85}#dts{font-size:26px;font-weight:600}#drawer button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);font-size:18px;padding:16px}#drawer button.cur{color:var(--acc);background:var(--card)}
-@media print{body{height:auto!important;overflow:visible}header,nav,#calc,#prod,.bh button{display:none!important}#billv{position:static;display:flex!important}.bh{background:none;color:#000}.bs{overflow:visible}}
+#billv{background:#fff;color:#000}#billv .bh{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}#billv .bh b{font-size:24px;font-weight:600}#billv .bh button{font-size:30px;padding:0 8px}#billv .bs{color:#000}#billv .bs table{font-size:23px;font-weight:700}#billv .bs th{color:#000;font-size:17px;font-weight:800;border-bottom:2px solid #000}#billv .bs td{padding:15px 4px;border-bottom:1px solid #888}#billv .bt{font-size:32px;font-weight:800;border-top:3px solid #000}#bshop{color:#000}
+#billv .bs td{border-bottom:1.5px solid #000}#billv .bs .rx{background:none;border:1.5px solid #c62828;color:#c62828;border-radius:6px;font-size:18px;font-weight:700;padding:2px 9px}
+@page{size:58mm auto;margin:0}
+@media print{body{height:auto!important;overflow:visible;background:#fff}header,nav,#calc,#prod,#bills,#sales,#set,#drawer,#scrim,.bh button,.np{display:none!important}#billv{position:static;display:flex!important;color:#000;background:#fff}.bh{background:none;color:#000;display:block;padding:2mm}.bh b{font-size:16px}.bs{overflow:visible;padding:0 2mm}#billv .bs table{font-size:12px}#billv .bs th{font-size:11px}#billv .bs td{padding:5px 2px}#bshop{font-size:16px}#billv .bt{font-size:16px}}
 </style></head><body>
 <header><button id="mn">☰</button><b><span id="ttl">CalcNote</span><small id="shp" style="display:none;font-size:12px;font-weight:400;opacity:.9"></small></b><button id="bl" title="Bill preview">🧾</button><button id="new" title="New">+</button><button id="save" title="Save">💾</button></header>
 <section id="calc" class="on">
@@ -46,9 +49,9 @@ nav .on2{color:var(--acc);border-top-color:var(--acc)}
 </section>
 <section id="bills"><div id="blist"></div></section>
 <section id="sales"><input type="date" id="sd"><div id="scards"></div><div id="sdays"></div></section>
-<section id="set"><label>App name</label><input id="sa" placeholder="CalcNote"><label>Shop name</label><input id="ss" placeholder="e.g. Dhanalaxmi"><button id="sv">Save</button><p id="smsg" style="color:#2e7d32"></p></section>
+<section id="set"><label>App name</label><input id="sa" placeholder="CalcNote"><label>Shop name</label><input id="ss" placeholder="e.g. Dhanalaxmi"><label>Bottom gap (px) — raise if the bottom is hidden</label><input id="sg" type="number" placeholder="auto"><button id="sv">Save</button><p id="smsg" style="color:#2e7d32"></p></section>
 <div id="scrim"></div><aside id="drawer"><div class="dh"><b id="dtl">CalcNote</b><small>Today's sales</small><div id="dts">0</div></div><button data-v="1">🧮 Calculator</button><button data-v="2">📦 Products</button><button data-v="3">🧾 Saved Bills</button><button data-v="4">📊 Sales (calendar)</button><button data-v="5">⚙️ Settings</button></aside>
-<div id="billv"><div class="bh"><b>Bill</b><span id="bdate"></span><button id="bprint">🖨</button><button id="bclose">✕</button></div><div class="bs"><div id="bshop"></div><table><thead><tr><th>#</th><th>Item</th><th>Qty</th><th>Rate</th><th>Total</th></tr></thead><tbody id="bbody"></tbody></table><div class="bt"><span>Total</span><span id="btot"></span></div></div></div>
+<div id="billv"><div class="bh"><b id="bno">Bill</b><button id="bclose">🏠</button><span id="bdate" style="display:none"></span></div><div class="bs"><div id="bshop"></div><table><thead><tr><th>#</th><th>Item</th><th>Qty</th><th>Rate</th><th>Total</th><th class="np"></th></tr></thead><tbody id="bbody"></tbody></table><div class="bt"><span>Total</span><span id="btot"></span></div></div></div>
 <nav><button id="t1" class="on2">Calculator</button><button id="t2">Products</button></nav>
 <script>
 var P=[{n:'kings',s:'k',p:219},{n:'vimal gutka',s:'vg',p:230}],ed=document.getElementById('ed');
@@ -107,16 +110,16 @@ $('bb').onclick=function(){var n=0;$('bulk').value.split('\n').forEach(function(
 $('ab').onclick=function(){var n=$('an').value.trim(),p=+$('ap').value;if(!n||!p)return;P.push({n:n,s:$('as').value.trim(),p:p});$('an').value=$('as').value=$('ap').value='';persist();draw()};
 function findP(l){var best=null;P.slice().sort(function(a,b){return b.n.length-a.n.length}).some(function(x){return [x.n,x.s].some(function(k){if(!k)return false;var m=new RegExp('(^|[^a-zA-Z])('+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')(?![a-zA-Z])','i').exec(l);if(m){best={p:x,rest:l.slice(m.index+m[1].length+m[2].length)};return true}return false})});return best}
 function showBill(){var rows=[],tot=0,n=0;
- ed.value.split('\n').forEach(function(l){var v=ev(l);if(v===null)return;n++;var f=findP(l),item,qty='',rate='';
+ ed.value.split('\n').forEach(function(l,li){var v=ev(l);if(v===null)return;n++;var f=findP(l),item,qty='',rate='';
   if(f){item=f.p.n;var r=f.rest.replace(/,/g,'').trim(),m;
    if(m=r.match(/^(\d+(?:\.\d+)?)\s*[*x]\s*(\d+(?:\.\d+)?)$/i)){rate=+m[1];qty=+m[2]}
    else if(m=r.match(/^[*x]\s*(\d+(?:\.\d+)?)$/i)){rate=f.p.p;qty=+m[1]}
    else{rate=v;qty=1}}
   else{item=l.replace(/[^a-zA-Z ]/g,'').trim()||'Item'}
-  tot+=v;rows.push('<tr><td>'+n+'</td><td>'+html(item)+'</td><td>'+qty+'</td><td>'+(rate===''?'':fmt(rate))+'</td><td>'+fmt(v)+'</td></tr>')});
- $('bbody').innerHTML=rows.join('')||'<tr><td colspan="5" style="text-align:center;color:#888">No items</td></tr>';
- $('btot').textContent=fmt(tot);$('bdate').textContent=new Date().toLocaleString();$('billv').style.display='flex'}
-$('bl').onclick=showBill;$('bclose').onclick=function(){$('billv').style.display='none'};$('bprint').onclick=function(){window.print()};
+  tot+=v;rows.push('<tr><td>'+n+'</td><td>'+html(item)+'</td><td>'+qty+'</td><td>'+(rate===''?'':fmt(rate))+'</td><td>'+fmt(v)+'</td><td class="np"><button class="rx" data-l="'+li+'">✕</button></td></tr>')});
+ $('bbody').innerHTML=rows.join('')||'<tr><td colspan="6" style="text-align:center;color:#888">No items</td></tr>';
+ $('btot').textContent=fmt(tot);$('bno').textContent='Bill #'+billNo();Array.prototype.forEach.call($('bbody').querySelectorAll('.rx'),function(b){b.onclick=function(){var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run();showBill()}});$('billv').style.display='flex'}
+$('bl').onclick=showBill;$('bclose').onclick=function(){$('billv').style.display='none';tab(1)};
 var B=[],curId=null;try{B=JSON.parse(localStorage.getItem('cn_b')||'[]')||[]}catch(e){}
 function saveB(){try{localStorage.setItem('cn_b',JSON.stringify(B))}catch(e){}}
 function dk(t){var d=new Date(t);return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
@@ -125,7 +128,7 @@ function todayTot(){var k=dk(Date.now()),s=0;B.forEach(function(b){if(dk(b.t)===
 function drawBills(){var box=$('blist');box.innerHTML='';if(!B.length){box.innerHTML='<p class="emp">No saved bills yet. Tap the save button to save a bill.</p>';return}
  B.forEach(function(b){var d=new Date(b.t),c=document.createElement('div');c.className='row';c.style.cursor='pointer';
   var pv=b.txt.split('\n').filter(function(x){return x.trim()}).slice(0,2).join(' · ');
-  c.innerHTML='<div class="n"><b>'+html(d.toLocaleDateString())+' '+html(d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}))+'</b><small>'+html(pv)+'</small></div><b>'+fmt(b.total)+'</b><button class="x">✕</button>';
+  c.innerHTML='<div class="n"><b>'+(b.no?'#'+b.no+' · ':'')+html(d.toLocaleDateString())+' '+html(d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}))+'</b><small>'+html(pv)+'</small></div><b>'+fmt(b.total)+'</b><button class="x">✕</button>';
   c.onclick=function(){ed.value=b.txt;curId=b.id;run();tab(1);showBill()};
   c.querySelector('.x').onclick=function(e){e.stopPropagation();if(confirm('Delete this bill?')){B=B.filter(function(z){return z.id!==b.id});saveB();drawBills()}};
   box.appendChild(c)})}
@@ -139,18 +142,20 @@ function drawSales(){var sd=$('sd');if(!sd.value)sd.value=dk(Date.now());var k=s
 $('sd').onchange=drawSales;
 var S={a:'CalcNote',s:''};try{var q0=JSON.parse(localStorage.getItem('cn_s')||'null');if(q0)S=q0}catch(e){}
 function applySet(){$('ttl').textContent=S.a||'CalcNote';$('shp').textContent=S.s;$('shp').style.display=S.s?'block':'none';$('dtl').textContent=S.s||S.a||'CalcNote';$('bshop').textContent=S.s;document.title=S.a||'CalcNote'}
-$('sv').onclick=function(){S={a:$('sa').value.trim()||'CalcNote',s:$('ss').value.trim()};try{localStorage.setItem('cn_s',JSON.stringify(S))}catch(e){}applySet();$('smsg').textContent='Saved ✓'};
+$('sv').onclick=function(){S={a:$('sa').value.trim()||'CalcNote',s:$('ss').value.trim(),g:$('sg').value};try{localStorage.setItem('cn_s',JSON.stringify(S))}catch(e){}applySet();fit();$('smsg').textContent='Saved ✓'};
 applySet();
 function openD(){$('dts').textContent=fmt(todayTot());$('drawer').classList.add('open');$('scrim').style.display='block'}
 function closeD(){$('drawer').classList.remove('open');$('scrim').style.display='none'}
-function tab(n){['calc','prod','bills','sales','set'].forEach(function(id,i){$(id).classList.toggle('on',n==i+1)});$('t1').classList.toggle('on2',n==1);$('t2').classList.toggle('on2',n==2);if(n==2)draw();if(n==3)drawBills();if(n==4)drawSales();if(n==5){$('sa').value=S.a;$('ss').value=S.s;$('smsg').textContent=''}Array.prototype.forEach.call(document.querySelectorAll('#drawer button[data-v]'),function(b){b.classList.toggle('cur',b.getAttribute('data-v')==n)});closeD()}
+function tab(n){['calc','prod','bills','sales','set'].forEach(function(id,i){$(id).classList.toggle('on',n==i+1)});$('t1').classList.toggle('on2',n==1);$('t2').classList.toggle('on2',n==2);if(n==2)draw();if(n==3)drawBills();if(n==4)drawSales();if(n==5){$('sa').value=S.a;$('ss').value=S.s;$('sg').value=S.g==null?'':S.g;$('smsg').textContent=''}Array.prototype.forEach.call(document.querySelectorAll('#drawer button[data-v]'),function(b){b.classList.toggle('cur',b.getAttribute('data-v')==n)});closeD()}
 $('mn').onclick=openD;$('scrim').onclick=closeD;
 Array.prototype.forEach.call(document.querySelectorAll('#drawer button[data-v]'),function(b){b.onclick=function(){tab(+b.getAttribute('data-v'))}});
 $('new').onclick=function(){if(!ed.value||confirm('Clear note?')){ed.value='';curId=null;run()}};
 $('save').onclick=function(){var tot=sumTxt(ed.value),b=this;if(!tot){b.textContent='⚠️';setTimeout(function(){b.textContent='💾'},900);return}
  if(curId){var x=B.filter(function(z){return z.id===curId})[0];if(x){x.txt=ed.value;x.total=tot}else curId=null}
- if(!curId)B.unshift({id:Date.now(),t:Date.now(),txt:ed.value,total:tot});
+ if(!curId){var no=peekNo();B.unshift({id:Date.now(),no:no,t:Date.now(),txt:ed.value,total:tot});try{localStorage.setItem('cn_n',no)}catch(e){}}
  curId=null;saveB();ed.value='';run();b.textContent='✅';setTimeout(function(){b.textContent='💾'},900)};
-function fit(){var h=window.innerHeight||document.documentElement.clientHeight;if(h>300)document.body.style.height=h+'px'}fit();window.addEventListener('resize',fit);
+function peekNo(){var n=0;try{n=+localStorage.getItem('cn_n')||0}catch(e){}return n+1}
+function billNo(){var x=curId?B.filter(function(z){return z.id===curId})[0]:null;return x?(x.no||B.length-B.indexOf(x)):peekNo()}
+function fit(){var h=Math.min(window.innerHeight||9999,document.documentElement.clientHeight||9999);var g=(S&&S.g!==undefined&&S.g!=='')?+S.g:(/; wv\)|Version\/\d/.test(navigator.userAgent)?56:0);if(h>300&&h<9999)document.body.style.height=(h-g)+'px'}fit();window.addEventListener('resize',fit);
 if(!ed.value)ed.value='kings 219*6';run();
 </script></body></html>
