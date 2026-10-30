@@ -61,7 +61,7 @@ body.bo #billv .bs{display:block!important;height:auto!important;overflow:visibl
  #bshop{font-size:16px}
  #billv .bt{display:flex;font-size:16px;page-break-inside:avoid}
 }
-</style></head><body>
+</style><style id="bfit"></style></head><body>
 <header><button id="mn">☰</button><b><span id="ttl">CalcNote</span><small id="shp" style="display:none;font-size:12px;font-weight:400;opacity:.9"></small></b><button id="bl" title="Bill preview">🧾</button><button id="new" title="New">+</button><button id="save" title="Save" style="display:none">💾</button></header>
 <section id="calc" class="on">
  <div id="wrap"><div id="gut">1</div><textarea id="ed" wrap="off" spellcheck="false" autocapitalize="off" placeholder="k*6"></textarea><div id="res"></div><div id="xs"></div></div>
@@ -145,6 +145,15 @@ function setPage(){
  $('pg').textContent='@page{size:58mm '+mm+'mm;margin:0}'}
 window.addEventListener('beforeprint',setPage);
 
+/* Bottom gap: keeps the Total clear of the app's bottom toolbar. Uses Settings > Bottom gap, default 90px */
+function gapPx(){var g=(typeof S!=='undefined')?S.g:null;return(g===''||g==null||isNaN(+g))?90:+g}
+/* Shrink rows so the whole bill fits on ONE screen (works well up to ~20 items; longer bills just scroll and print via "All Pages") */
+function fitBill(){
+ var n=$('bbody').querySelectorAll('tr').length||1,gap=gapPx(),avail=window.innerHeight-gap-150;
+ var rh=Math.max(26,Math.min(46,avail/n)),fs=Math.max(12,Math.min(23,Math.floor(rh*0.5))),pd=Math.max(2,Math.floor((rh-fs*1.2)/2));
+ $('bfit').textContent='body.bo #billv .bs{padding-bottom:'+gap+'px!important}body.bo #billv .bs table{font-size:'+fs+'px!important}body.bo #billv .bs th{font-size:'+Math.max(11,fs-4)+'px!important}body.bo #billv .bs td{padding:'+pd+'px 4px!important}body.bo #billv .bt{font-size:'+Math.min(32,fs+8)+'px!important}'}
+window.addEventListener('resize',fitBill);
+
 function showBill(){autoSave();var rows=[],tot=0,n=0;
  ed.value.split('\n').forEach(function(l,li){var v=ev(l);if(v===null)return;n++;var f=findP(l),item,qty='',rate='';
   if(f){item=f.p.n;var r=f.rest.replace(/,/g,'').trim(),m;
@@ -154,7 +163,7 @@ function showBill(){autoSave();var rows=[],tot=0,n=0;
   else{item=l.replace(/[^a-zA-Z ]/g,'').trim()||'Item'}
   tot+=v;rows.push('<tr><td>'+n+'</td><td>'+html(item)+'</td><td>'+qty+'</td><td>'+(rate===''?'':fmt(rate))+'</td><td>'+fmt(v)+'</td><td class="np"><button class="rx" data-l="'+li+'">✕</button></td></tr>')});
  $('bbody').innerHTML=rows.join('')||'<tr><td colspan="6" style="text-align:center;color:#888">No items</td></tr>';
- $('btot').textContent=fmt(tot);$('bno').textContent='Bill #'+billNo();Array.prototype.forEach.call($('bbody').querySelectorAll('.rx'),function(b){b.onclick=function(){var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run();showBill()}});$('billv').style.display='flex';document.body.classList.add('bo');window.scrollTo(0,0);setPage()}
+ $('btot').textContent=fmt(tot);$('bno').textContent='Bill #'+billNo();Array.prototype.forEach.call($('bbody').querySelectorAll('.rx'),function(b){b.onclick=function(){var L=ed.value.split('\n');L.splice(+b.getAttribute('data-l'),1);ed.value=L.join('\n');run();showBill()}});$('billv').style.display='flex';document.body.classList.add('bo');fitBill();window.scrollTo(0,0);setPage()}
 ed.addEventListener('input',function(e){var v=ed.value,c=ed.selectionStart;if(e.data===' '&&c===v.length){var ln=v.slice(v.lastIndexOf('\n',c-2)+1,c-1);if(/[*x]\s*\d+(\.\d+)?$/i.test(ln)&&ev(ln)!==null){ed.value=v.slice(0,c-1)+'\n';ed.setSelectionRange(c,c);run()}}});
 var SAMPLE=[['Parle G',10,'pg'],['Maggi Noodles',14,'mg'],['Lays Chips',20,'ly'],['Kurkure',20,'kr'],['Good Day Biscuit',10,'gd'],['Dairy Milk',20,'dm'],['Sprite',40,'sp'],['Coca Cola',40,'cc'],['Water Bottle',20,'wb'],['Dove Soap',55,'ds'],['Lux Soap',35,'lx'],['Colgate',60,'cg'],['Clinic Plus',2,'cp'],['Surf Excel',10,'se'],['Tata Salt',28,'ts'],['Sugar',45,'sg'],['Eggs',7,'eg'],['Milk Packet',30,'ml'],['Bread',40,'br'],['Queen Cake',10,'qc']];
 function addSample(){var n=0;SAMPLE.forEach(function(x){if(!P.some(function(y){return y.n.toLowerCase()===x[0].toLowerCase()})){P.push({n:x[0],s:x[2],p:x[1]});n++}});persist();return n}
@@ -185,7 +194,7 @@ function drawSales(){var sd=$('sd');if(!sd.value)sd.value=dk(Date.now());var k=s
 $('sd').onchange=drawSales;
 var S={a:'CalcNote',s:''};try{var q0=JSON.parse(localStorage.getItem('cn_s')||'null');if(q0)S=q0}catch(e){}
 function applySet(){$('ttl').textContent=S.a||'CalcNote';$('shp').textContent=S.s;$('shp').style.display=S.s?'block':'none';$('dtl').textContent=S.s||S.a||'CalcNote';$('bshop').textContent=S.s;document.title=S.a||'CalcNote'}
-$('sv').onclick=function(){S={a:$('sa').value.trim()||'CalcNote',s:$('ss').value.trim(),g:$('sg').value};try{localStorage.setItem('cn_s',JSON.stringify(S))}catch(e){}applySet();fit();$('smsg').textContent='Saved ✓'};
+$('sv').onclick=function(){S={a:$('sa').value.trim()||'CalcNote',s:$('ss').value.trim(),g:$('sg').value};try{localStorage.setItem('cn_s',JSON.stringify(S))}catch(e){}applySet();fit();fitBill();$('smsg').textContent='Saved ✓'};
 applySet();
 function openD(){$('dts').textContent=fmt(todayTot());$('drawer').classList.add('open');$('scrim').style.display='block'}
 function closeD(){$('drawer').classList.remove('open');$('scrim').style.display='none'}
